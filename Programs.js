@@ -1,13 +1,23 @@
 const prompt = require('prompt-sync')();
 
-let num = prompt("Enter a Number:  ")
-num = parseInt(num)
-let factors = new Array()
-for(let factor = 2; factor <= num; factor++){
-    while(num % factor == 0){
-        factors.push(factor);
-        num = num / factor;
+let num1 = prompt("Enter the starting value of the range 0-100:  ")
+let num2 = prompt("Enter the ending value of the range 0-100:  ")
+
+num1 = parseInt(num1)
+num2 = parseInt(num2)
+let numArray = new Array()
+
+if(num1 > num2){
+    console.log("Invalid Range")
+    return
+}
+else{
+    for(let i = num1; i <= num2; i++){
+        let temp = i.toString();
+        temp = temp.split("")
+        if(temp[0] == temp[1])
+            numArray.push(i)
     }
 }
 
-console.log("Prime Factorization of " + num + " is:  " + factors.toString())
+console.log("Numbers with repeated digits are:  " + numArray.toString())
