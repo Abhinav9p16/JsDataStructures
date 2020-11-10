@@ -1,10 +1,13 @@
-let numArray = new Array();
+const prompt = require('prompt-sync')();
 
-for(let num = 0; num < 10; num++){
-    let numCurr = Math.floor(Math.random()*900) + 100
-    numArray.push(numCurr)
+let num = prompt("Enter a Number:  ")
+num = parseInt(num)
+let factors = new Array()
+for(let factor = 2; factor <= num; factor++){
+    while(num % factor == 0){
+        factors.push(factor);
+        num = num / factor;
+    }
 }
 
-console.log("Array is :  " + numArray)
-numArray.sort();
-console.log("Sorted Array is :  " + numArray.toString() + "\nMinimum number is :  " + numArray[0] + "\nMaximum number is :  " + numArray[numArray.length -1])
+console.log("Prime Factorization of " + num + " is:  " + factors.toString())
