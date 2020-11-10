@@ -1,27 +1,36 @@
-function randomDate() {
-    let begDate = new Date("1992-01-01");
-    let endDate = new Date("1993-12-31");
-    return new Date(begDate.getTime() + Math.random() * (endDate.getTime() - begDate.getTime()));
+function Result() {
+    return Math.floor(Math.random() * 100) % 6 + 1; 
 }
+let count = new Map();
+let min_Key;
+let max_Key;
+let max_Value = -1;
+let min_Value = 11;
 
-let birthMap = new Map();
-
-for(var i = 0; i < 50; i++) {
-    
-    let birthday = randomDate();
-    let username = "user" + i;
-    let month = birthday.getMonth() + 1;
-
-    if(!birthMap.has(month)) {
-        let users = [username];
-        birthMap.set(month, users);
-    }
+while(true) {
+    var number = Result(); 
+    if(!count.has(number))
+        count.set(number, 1);
     else {
-        let users = birthMap.get(month);
-        users.push(username);
-        birthMap.set(month, users);
+        let count = count.get(number);
+        count.set(number, ++count);
+    }
+    if(count.get(number) == 10) 
+        break;
+}
+
+console.log(count);
+
+for( let [key, value] of count) {
+    if(value < min_Value) {
+        min_Key = key;
+        min_Value = value;
+    }
+    if(value > max_Value) {
+        max_Key = key;
+        max_Value = value;
     }
 }
 
-for(let [key, value] of birthMap)
-    console.log("Month: " + key + ", Users: " + value.join(", "));
+console.log("Minimum key count: " + min_Key + ", count: " + min_Value);
+console.log("Maximum key count: " + max_Key + ", count: " + max_Value);
