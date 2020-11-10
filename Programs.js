@@ -1,21 +1,27 @@
-function Second_Greatest_Lowest(arr_num)
-{
-  arr_num.sort(function(x,y)
-           {
-           return x-y;
-           });
-  var uniqa = [arr_num[0]];
-  var result = [];
-  
-  for(var j=1; j < arr_num.length; j++)
-  {
-    if(arr_num[j-1] !== arr_num[j])
-    {
-      uniqa.push(arr_num[j]);
-    }
-  }
-    result.push(uniqa[1],uniqa[uniqa.length-2]);
-  return result.join(',');
-  }
+function randomDate() {
+    let begDate = new Date("1992-01-01");
+    let endDate = new Date("1993-12-31");
+    return new Date(begDate.getTime() + Math.random() * (endDate.getTime() - begDate.getTime()));
+}
 
-console.log(Second_Greatest_Lowest([20,23,34,45,85]));
+let birthMap = new Map();
+
+for(var i = 0; i < 50; i++) {
+    
+    let birthday = randomDate();
+    let username = "user" + i;
+    let month = birthday.getMonth() + 1;
+
+    if(!birthMap.has(month)) {
+        let users = [username];
+        birthMap.set(month, users);
+    }
+    else {
+        let users = birthMap.get(month);
+        users.push(username);
+        birthMap.set(month, users);
+    }
+}
+
+for(let [key, value] of birthMap)
+    console.log("Month: " + key + ", Users: " + value.join(", "));
